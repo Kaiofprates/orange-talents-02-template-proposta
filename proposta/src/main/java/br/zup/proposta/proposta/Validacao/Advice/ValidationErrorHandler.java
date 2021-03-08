@@ -1,5 +1,6 @@
 package br.zup.proposta.proposta.Validacao.Advice;
 
+import br.zup.proposta.proposta.Validacao.Exeptions.DuplicateDocumentExeption;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -33,6 +34,17 @@ public class ValidationErrorHandler {
         });
         return dto;
     }
+
+    @ResponseStatus(code = HttpStatus.UNPROCESSABLE_ENTITY)
+    @ExceptionHandler(DuplicateDocumentExeption.class)
+    public FormErrorDto duplicateDocument(DuplicateDocumentExeption exception) {
+        LocalDateTime time = LocalDateTime.now();
+        FormErrorDto dto = new FormErrorDto("CPF / CNPJ","Não foi possível concluir a sua proposta",422,time);
+        return dto;
+    }
+
+
+
 
 
 

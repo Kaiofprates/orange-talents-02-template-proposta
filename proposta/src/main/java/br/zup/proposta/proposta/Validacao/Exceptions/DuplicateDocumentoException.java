@@ -1,4 +1,4 @@
-package br.zup.proposta.proposta.Validacao.Exeptions;
+package br.zup.proposta.proposta.Validacao.Exceptions;
 
 public class DuplicateDocumentoException extends Exception{
     public DuplicateDocumentoException() {

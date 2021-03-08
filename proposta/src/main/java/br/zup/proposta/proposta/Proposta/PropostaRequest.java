@@ -1,7 +1,7 @@
 package br.zup.proposta.proposta.Proposta;
 
 import br.zup.proposta.proposta.Validacao.Annotations.CPFOrCNPJ;
-import br.zup.proposta.proposta.Validacao.Exeptions.DuplicateDocumentoException;
+import br.zup.proposta.proposta.Validacao.Exceptions.DuplicateDocumentoException;
 
 import javax.validation.Valid;
 import javax.validation.constraints.*;

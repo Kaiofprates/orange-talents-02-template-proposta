@@ -1,6 +1,6 @@
 package br.zup.proposta.proposta.Validacao.Advice;
 
-import br.zup.proposta.proposta.Validacao.Exeptions.DuplicateDocumentoException;
+import br.zup.proposta.proposta.Validacao.Exceptions.DuplicateDocumentoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;

@@ -1,6 +1,6 @@
 package br.zup.proposta.proposta.Proposta;
 
-import br.zup.proposta.proposta.Validacao.Exeptions.DuplicateDocumentoException;
+import br.zup.proposta.proposta.Validacao.Exceptions.DuplicateDocumentoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.Assert;

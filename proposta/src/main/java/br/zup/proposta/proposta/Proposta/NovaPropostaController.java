@@ -1,5 +1,7 @@
 package br.zup.proposta.proposta.Proposta;
 
+import br.zup.proposta.proposta.Validacao.Exeptions.DuplicateDocumentExeption;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
@@ -15,19 +17,16 @@ import java.net.URI;
 @RequestMapping("/api")
 public class NovaPropostaController {
 
-    @PersistenceContext
-    private EntityManager manager;
+    @Autowired
+    private PropostaRepository repository;
     // 1
 
     @PostMapping("/propostas")
-    @Transactional
     // 2
-    public ResponseEntity<?> create(@RequestBody  @Valid PropostaRequest request, UriComponentsBuilder response){
+    public ResponseEntity<?> create(@RequestBody  @Valid PropostaRequest request, UriComponentsBuilder response) throws DuplicateDocumentExeption {
 
         //3
-        Proposta proposta = request.toModel();
-
-        manager.persist(proposta);
+        Proposta proposta = repository.save(request.toModel(repository));
 
         // 4
         Assert.isTrue(proposta != null, "Não foi possível concluir sua proposta");

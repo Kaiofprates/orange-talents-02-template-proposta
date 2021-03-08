@@ -1,10 +1,16 @@
 package br.zup.proposta.proposta.Proposta;
 
 import br.zup.proposta.proposta.Validacao.Annotations.CPFOrCNPJ;
+import br.zup.proposta.proposta.Validacao.Exeptions.DuplicateDocumentExeption;
+import javassist.tools.web.BadHttpRequest;
+import org.springframework.util.Assert;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
+import java.util.Optional;
 
 public class PropostaRequest {
 
@@ -40,7 +46,14 @@ public class PropostaRequest {
         this.salario = salario;
     }
 
-    public Proposta toModel() {
+    public Proposta toModel(PropostaRepository repository) throws DuplicateDocumentExeption {
+        Optional<Proposta> proposta  = repository.findByDocumento(documento);
+
+        if(proposta.isPresent()){
+            throw  new DuplicateDocumentExeption("Não foi possível completar seu cadastro");
+        }
+
+        //Assert.isTrue(!proposta.isPresent(),"Não foi possível completar sua proposta");
         return new Proposta(documento,email,nome,endereco,salario);
     }
 

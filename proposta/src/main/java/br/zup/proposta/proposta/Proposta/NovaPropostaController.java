@@ -1,15 +1,12 @@
 package br.zup.proposta.proposta.Proposta;
 
-import br.zup.proposta.proposta.Validacao.Exeptions.DuplicateDocumentExeption;
+import br.zup.proposta.proposta.Validacao.Exeptions.DuplicateDocumentoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.net.URI;
 
@@ -23,7 +20,7 @@ public class NovaPropostaController {
 
     @PostMapping("/propostas")
     // 2
-    public ResponseEntity<?> create(@RequestBody  @Valid PropostaRequest request, UriComponentsBuilder response) throws DuplicateDocumentExeption {
+    public ResponseEntity<?> create(@RequestBody  @Valid PropostaRequest request, UriComponentsBuilder response) throws DuplicateDocumentoException {
 
         //3
         Proposta proposta = repository.save(request.toModel(repository));

@@ -1,4 +1,4 @@
-package br.zup.proposta.proposta.ClientHttp;
+package br.zup.proposta.proposta.ClientHttp.SolicitacaoCartao;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;

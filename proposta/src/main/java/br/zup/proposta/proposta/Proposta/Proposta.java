@@ -30,6 +30,8 @@ public class Proposta {
     @Positive
     private BigDecimal salario;
 
+    @Enumerated(value = EnumType.STRING)
+    private Estado status = Estado.NAO_ELEGIVEL;
 
     @Deprecated
     public Proposta(){};
@@ -51,5 +53,11 @@ public class Proposta {
 
     public String getDocumento() {
         return documento;
+    }
+    public String getNome() {
+        return nome;
+    }
+    public void setStatus(Estado status) {
+        this.status = status;
     }
 }

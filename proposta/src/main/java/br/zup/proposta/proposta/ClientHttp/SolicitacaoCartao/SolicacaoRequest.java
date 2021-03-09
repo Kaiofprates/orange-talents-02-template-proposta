@@ -1,11 +1,11 @@
-package br.zup.proposta.proposta.ClientHttp;
+package br.zup.proposta.proposta.ClientHttp.SolicitacaoCartao;
 
 public class SolicacaoRequest {
     private String documento;
     private String nome;
-    private String idProposta;
+    private Long idProposta;
 
-    public SolicacaoRequest(String documento, String nome, String idProposta) {
+    public SolicacaoRequest(String documento, String nome, Long idProposta) {
         this.documento = documento;
         this.nome = nome;
         this.idProposta = idProposta;
@@ -19,7 +19,7 @@ public class SolicacaoRequest {
         return nome;
     }
 
-    public String getIdProposta() {
+    public Long getIdProposta() {
         return idProposta;
     }
 }

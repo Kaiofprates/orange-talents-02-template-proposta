@@ -1,4 +1,4 @@
-package br.zup.proposta.proposta.ClientHttp;
+package br.zup.proposta.proposta.ClientHttp.SolicitacaoCartao;
 
 public class ResponseSolicitacao {
     private String documento;

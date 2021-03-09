@@ -49,7 +49,6 @@ public class PropostaRequest {
             throw  new DuplicateDocumentoException("Não foi possível completar seu cadastro");
         }
 
-        //Assert.isTrue(!proposta.isPresent(),"Não foi possível completar sua proposta");
         return new Proposta(documento,email,nome,endereco,salario);
     }
 

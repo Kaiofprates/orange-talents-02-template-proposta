@@ -17,6 +17,7 @@ public class Proposta {
     private Long id;
     @NotBlank
     @CPFOrCNPJ
+    @Column(unique = true)
     private String documento;
     @NotBlank
     @Email
@@ -32,6 +33,9 @@ public class Proposta {
 
     @Enumerated(value = EnumType.STRING)
     private Estado status = Estado.NAO_ELEGIVEL;
+
+    private String cartao;
+
 
     @Deprecated
     public Proposta(){};
@@ -60,4 +64,11 @@ public class Proposta {
     public void setStatus(Estado status) {
         this.status = status;
     }
+    public void setCartao(String cartao) {
+        this.cartao = cartao;
+    }
+    public String getCartao() {
+        return cartao;
+    }
+
 }

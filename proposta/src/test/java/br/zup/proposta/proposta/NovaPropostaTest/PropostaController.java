@@ -42,7 +42,7 @@ public class PropostaController {
     public static Stream<Arguments> requests(){
       return Stream.of(
               Arguments.of("{\n" +
-                      "\t\"documento\" : \"59417362070\",\n" +
+                      "\t\"documento\" : \"253.490.160-59\",\n" +
                       "\t\"email\" : \"john.com\",\n" +
                       "\t\"nome\" : \"John Doe\",\n" +
                       "\t\"endereco\" : {\n" +
@@ -113,7 +113,7 @@ public class PropostaController {
                       "}"),
               Arguments.of("{\n" +
                       "\t\"documento\" : \"60.988.927/0001-03\",\n" +
-                      "\t\"email\" : \"john@mail.com\",\n" +
+                      "\t\"email\" : \"john5@mail.com\",\n" +
                       "\t\"nome\" : \"John Doe\",\n" +
                       "\t\"endereco\" : {\n" +
                       "\t\t\"logradouro\" : \"Baker\",\n" +
@@ -145,8 +145,8 @@ public class PropostaController {
     public static Stream<Arguments> sucess(){
         return Stream.of(
                 Arguments.of("{\n" +
-                        "\t\"documento\" : \"59417362070\",\n" +
-                        "\t\"email\" : \"john@mail.com\",\n" +
+                        "\t\"documento\" : \"754.147.690-01\",\n" +
+                        "\t\"email\" : \"john3@mail.com\",\n" +
                         "\t\"nome\" : \"John Doe\",\n" +
                         "\t\"endereco\" : {\n" +
                         "\t\t\"logradouro\" : \"Baker\",\n" +
@@ -159,8 +159,8 @@ public class PropostaController {
                         "\t\"salario\" : \"1000\"\t\n" +
                         "}"),
                 Arguments.of("{\n" +
-                        "\t\"documento\" : \"60.988.927/0001-03\",\n" +
-                        "\t\"email\" : \"john@mail.com\",\n" +
+                        "\t\"documento\" : \"30.038.243/0001-80\",\n" +
+                        "\t\"email\" : \"john2@mail.com\",\n" +
                         "\t\"nome\" : \"John Doe\",\n" +
                         "\t\"endereco\" : {\n" +
                         "\t\t\"logradouro\" : \"Baker\",\n" +

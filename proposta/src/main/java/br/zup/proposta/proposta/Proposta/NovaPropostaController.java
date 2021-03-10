@@ -17,24 +17,19 @@ public class NovaPropostaController {
 
     @Autowired
     private PropostaRepository repository;
-    // 1
 
     @Autowired
     private Cartao cartao;
 
     @PostMapping("/propostas")
-    // 2
     public ResponseEntity<?> create(@RequestBody  @Valid PropostaRequest request, UriComponentsBuilder response) throws DuplicateDocumentoException {
 
-        //3
         Proposta proposta = repository.save(request.toModel(repository));
 
-        // 4
         Assert.isTrue(proposta != null, "Não foi possível concluir sua proposta");
 
         cartao.avaliaCartao(proposta);
 
-        // 5
         URI location = response.path("api/propostas/{id}").buildAndExpand(proposta.getId()).toUri();
 
         return ResponseEntity.created(location).build();

@@ -24,7 +24,7 @@ public class DuplicateDocumentoTeste {
 
         String request = "{\n" +
                 "\t\"documento\" : \"60.988.927/0001-03\",\n" +
-                "\t\"email\" : \"john@mail.com\",\n" +
+                "\t\"email\" : \"john1@mail.com\",\n" +
                 "\t\"nome\" : \"John Doe\",\n" +
                 "\t\"endereco\" : {\n" +
                 "\t\t\"logradouro\" : \"Baker\",\n" +

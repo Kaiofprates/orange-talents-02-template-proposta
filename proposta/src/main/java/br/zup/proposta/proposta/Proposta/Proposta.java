@@ -17,7 +17,7 @@ public class Proposta {
     private Long id;
     @NotBlank
     @CPFOrCNPJ
-   // @Column(unique = true)
+    @Column(unique = true)
     private String documento;
     @NotBlank
     @Email

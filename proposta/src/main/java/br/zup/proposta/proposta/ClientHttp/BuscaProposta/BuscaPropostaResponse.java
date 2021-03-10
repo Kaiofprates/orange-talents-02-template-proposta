@@ -1,5 +1,7 @@
 package br.zup.proposta.proposta.ClientHttp.BuscaProposta;
 
+import br.zup.proposta.proposta.Cartao.*;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -9,12 +11,12 @@ public class BuscaPropostaResponse {
     private String id;
     private LocalDateTime emitidoEm;
     private String titular;
-    private List<?> bloqueios;
-    private List<?> avisos;
-    private List<?> carteiras;
-    private List<?> parcelas;
+    private List<Bloqueios> bloqueios;
+    private List<Avisos> avisos;
+    private List<Carteiras> carteiras;
+    private List<Parcela> parcelas;
     private BigDecimal limite;
-    private String renegociacao;
+    private Renegociacao renegociacao;
     private Vencimento vencimento;
     private Long idProposta;
 
@@ -22,14 +24,9 @@ public class BuscaPropostaResponse {
     @Deprecated
     public BuscaPropostaResponse(){}
 
-    public BuscaPropostaResponse(String id, LocalDateTime emitidoEm, String titular, List<?> bloqueios,
-                                 List<?> avisos,
-                                 List<?> carteiras,
-                                 List<?> parcelas,
-                                 BigDecimal limite,
-                                 String renegociacao,
-                                 Vencimento vencimento,
-                                 Long idProposta) {
+    public BuscaPropostaResponse(String id, LocalDateTime emitidoEm, String titular, List<Bloqueios> bloqueios, List<Avisos> avisos, List<Carteiras> carteiras,
+                                 List<Parcela> parcelas, BigDecimal limite,
+                                 Renegociacao renegociacao, Vencimento vencimento, Long idProposta) {
         this.id = id;
         this.emitidoEm = emitidoEm;
         this.titular = titular;
@@ -55,19 +52,19 @@ public class BuscaPropostaResponse {
         return titular;
     }
 
-    public List<?> getBloqueios() {
+    public List<Bloqueios> getBloqueios() {
         return bloqueios;
     }
 
-    public List<?> getAvisos() {
+    public List<Avisos> getAvisos() {
         return avisos;
     }
 
-    public List<?> getCarteiras() {
+    public List<Carteiras> getCarteiras() {
         return carteiras;
     }
 
-    public List<?> getParcelas() {
+    public List<Parcela> getParcelas() {
         return parcelas;
     }
 
@@ -75,7 +72,7 @@ public class BuscaPropostaResponse {
         return limite;
     }
 
-    public String getRenegociacao() {
+    public Renegociacao getRenegociacao() {
         return renegociacao;
     }
 
@@ -85,5 +82,9 @@ public class BuscaPropostaResponse {
 
     public Long getIdProposta() {
         return idProposta;
+    }
+
+    public Cartao toModel() {
+        return new Cartao(id,emitidoEm,titular,bloqueios,avisos,carteiras,parcelas,limite,renegociacao,vencimento,idProposta);
     }
 }

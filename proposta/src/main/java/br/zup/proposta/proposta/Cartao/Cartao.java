@@ -1,51 +1,53 @@
 package br.zup.proposta.proposta.Cartao;
 
-import br.zup.proposta.proposta.ClientHttp.SolicitacaoCartao.SolicacaoRequest;
-import br.zup.proposta.proposta.ClientHttp.SolicitacaoCartao.SolicitacaoClient;
-import br.zup.proposta.proposta.Proposta.Estado;
-import br.zup.proposta.proposta.Proposta.Proposta;
-import br.zup.proposta.proposta.Proposta.PropostaRepository;
-import feign.FeignException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.List;
 
-@Component
+@Entity
 public class Cartao {
 
-    @Autowired
-    private SolicitacaoClient client;
+    @Id
+    private String id;
+    @NotNull
+    private LocalDateTime emitidoEm;
+    @NotBlank
+    private String titular;
+    @OneToMany
+    private List<Bloqueios> bloqueios;
+    @OneToMany
+    private List<Avisos> avisos;
+    @OneToMany
+    private List<Carteiras> carteiras;
+    @OneToMany
+    private List<Parcela> parcelas;
+    private BigDecimal limite;
+    @OneToOne(cascade = CascadeType.MERGE)
+    private Renegociacao renegociacao;
+    @OneToOne(cascade = CascadeType.MERGE)
+    private Vencimento vencimento;
+    @NotNull
+    private Long idProposta;
 
-    @Autowired
-    private PropostaRepository repository;
+    @Deprecated
+    public Cartao(){}
 
-    private final Logger logger  = LoggerFactory.getLogger(Cartao.class);
-
-    /**
-     * Primeira implementação, observar a possibilidade de refatorar no futuro!
-     */
-
-    public void avaliaCartao(Proposta proposta){
-        SolicacaoRequest request = new SolicacaoRequest(proposta.getDocumento(),proposta.getNome(),proposta.getId());
-
-        try{
-
-            /**
-             *  Essa primeira implementação está muito dependende da resposta de erro da api
-             *  Kaio do futuro, tente fazer uma checagem mais consisa do que vem da api
-             *  talvez usando o próprio tratamento de error do Feign!
-             */
-
-            String avaliacao = client.cadastra(request).getResultadoSolicitacao();
-            proposta.setStatus(Estado.ELEGIVEL);
-            repository.save(proposta);
-            logger.info("Proposta avaliada com sucesso!");
-            logger.info(avaliacao);
-
-        }catch (FeignException e){
-            logger.error(e.getMessage());
-        }
+    public Cartao(String id, @NotNull LocalDateTime emitidoEm, @NotBlank String titular, List<Bloqueios> bloqueios, List<Avisos> avisos, List<Carteiras> carteiras, List<Parcela> parcelas,
+                  BigDecimal limite, Renegociacao renegociacao, Vencimento vencimento, @NotNull Long idProposta) {
+        this.id = id;
+        this.emitidoEm = emitidoEm;
+        this.titular = titular;
+        this.bloqueios = bloqueios;
+        this.avisos = avisos;
+        this.carteiras = carteiras;
+        this.parcelas = parcelas;
+        this.limite = limite;
+        this.renegociacao = renegociacao;
+        this.vencimento = vencimento;
+        this.idProposta = idProposta;
     }
-
 }

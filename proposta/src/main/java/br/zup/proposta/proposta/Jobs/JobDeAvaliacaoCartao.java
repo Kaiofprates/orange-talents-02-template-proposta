@@ -1,5 +1,7 @@
 package br.zup.proposta.proposta.Jobs;
 
+import br.zup.proposta.proposta.Cartao.Cartao;
+import br.zup.proposta.proposta.Cartao.CartaoRepository;
 import br.zup.proposta.proposta.ClientHttp.BuscaProposta.BuscaPropostaClient;
 import br.zup.proposta.proposta.ClientHttp.BuscaProposta.BuscaPropostaResponse;
 import br.zup.proposta.proposta.Proposta.Estado;
@@ -20,6 +22,9 @@ public class JobDeAvaliacaoCartao {
     private PropostaRepository repository;
 
     @Autowired
+    private CartaoRepository cartaoRepository;
+
+    @Autowired
     private BuscaPropostaClient client;
 
     private  final Logger logger  =  LoggerFactory.getLogger(JobDeAvaliacaoCartao.class);
@@ -33,8 +38,17 @@ public class JobDeAvaliacaoCartao {
    }
     public void getCartaoId(Proposta proposta){
         BuscaPropostaResponse response = client.busca(proposta.getId());
+
+        Cartao cartao = response.toModel();
+
+        if(cartao != null) {
+            cartaoRepository.save(cartao);
+        }
+
         proposta.setCartao(response.getId());
+
         repository.save(proposta);
+
         logger.info("Atualização de cadastro para o id "+ proposta.getId() + " gerada com sucesso");
     }
 

@@ -1,6 +1,6 @@
 package br.zup.proposta.proposta.Proposta;
 
-import br.zup.proposta.proposta.Cartao.Cartao;
+import br.zup.proposta.proposta.Cartao.AvaliaCartao;
 import br.zup.proposta.proposta.Validacao.Exceptions.DuplicateDocumentoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +19,7 @@ public class NovaPropostaController {
     private PropostaRepository repository;
 
     @Autowired
-    private Cartao cartao;
+    private AvaliaCartao avaliaCartao;
 
     @PostMapping("/propostas")
     public ResponseEntity<?> create(@RequestBody  @Valid PropostaRequest request, UriComponentsBuilder response) throws DuplicateDocumentoException {
@@ -28,7 +28,7 @@ public class NovaPropostaController {
 
         Assert.isTrue(proposta != null, "Não foi possível concluir sua proposta");
 
-        cartao.avaliaCartao(proposta);
+        avaliaCartao.avaliaCartao(proposta);
 
         URI location = response.path("api/propostas/{id}").buildAndExpand(proposta.getId()).toUri();
 

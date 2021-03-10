@@ -71,4 +71,7 @@ public class Proposta {
         return cartao;
     }
 
+    public Estado getStatus() {
+        return status;
+    }
 }

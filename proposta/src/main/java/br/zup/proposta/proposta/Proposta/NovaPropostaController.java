@@ -10,6 +10,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -33,6 +34,18 @@ public class NovaPropostaController {
         URI location = response.path("api/propostas/{id}").buildAndExpand(proposta.getId()).toUri();
 
         return ResponseEntity.created(location).build();
+    }
+
+    @GetMapping("/propostas/{id}")
+    public ResponseEntity<?> retornaProposta(@PathVariable("id") Long id){
+        Optional<Proposta> proposta = repository.findById(id);
+
+        if(proposta.isPresent()){
+            PropostaResponse response = new PropostaResponse(proposta.get());
+            Assert.notNull(response,"Erro ao retornar dados da proposta");
+            return  ResponseEntity.ok(response);
+        }
+        return ResponseEntity.notFound().build();
     }
 
 

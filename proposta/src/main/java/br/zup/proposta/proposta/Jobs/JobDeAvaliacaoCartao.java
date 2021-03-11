@@ -33,10 +33,10 @@ public class JobDeAvaliacaoCartao {
     private void avaliaCartoes() {
         List<Proposta> propostas = repository.findByStatusAndCartao(Estado.ELEGIVEL,null);
         if(!propostas.isEmpty()){
-            propostas.stream().forEach(this::getCartaoId);
+            propostas.stream().forEach(this::SaveCartaoId);
         }
    }
-    public void getCartaoId(Proposta proposta){
+    public void SaveCartaoId(Proposta proposta){
         BuscaPropostaResponse response = client.busca(proposta.getId());
 
         Cartao cartao = response.toModel();

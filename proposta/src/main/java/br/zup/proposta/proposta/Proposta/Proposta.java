@@ -74,4 +74,19 @@ public class Proposta {
     public Estado getStatus() {
         return status;
     }
+
+
+    // gets gerado para testes
+
+    public String getEmail() {
+        return email;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public BigDecimal getSalario() {
+        return salario;
+    }
 }

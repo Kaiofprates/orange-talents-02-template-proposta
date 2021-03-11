@@ -60,4 +60,8 @@ public class Cartao {
     public List<Digital> getDigitais() {
         return digitais;
     }
+
+    public String getId() {
+        return id;
+    }
 }

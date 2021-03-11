@@ -1,4 +1,4 @@
-package br.zup.proposta.proposta.Cartao;
+package br.zup.proposta.proposta.Cartao.Model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

@@ -1,6 +1,6 @@
 package br.zup.proposta.proposta.ClientHttp.BuscaProposta;
 
-import br.zup.proposta.proposta.Cartao.*;
+import br.zup.proposta.proposta.Cartao.Model.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

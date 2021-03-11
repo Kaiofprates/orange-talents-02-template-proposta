@@ -1,13 +1,12 @@
-package br.zup.proposta.proposta.Cartao;
+package br.zup.proposta.proposta.Cartao.Model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.PositiveOrZero;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
-
+import java.util.ArrayList;
 @Entity
 public class Cartao {
 
@@ -30,6 +29,8 @@ public class Cartao {
     private Renegociacao renegociacao;
     @OneToOne(cascade = CascadeType.MERGE)
     private Vencimento vencimento;
+    @OneToMany(cascade = CascadeType.MERGE, mappedBy = "idCartao")
+    private List<Digital> digitais = new ArrayList<>();
     @NotNull
     private Long idProposta;
 
@@ -49,5 +50,14 @@ public class Cartao {
         this.renegociacao = renegociacao;
         this.vencimento = vencimento;
         this.idProposta = idProposta;
+    }
+
+
+    public void setDigitais(Digital digital) {
+        digitais.add(digital);
+    }
+
+    public List<Digital> getDigitais() {
+        return digitais;
     }
 }

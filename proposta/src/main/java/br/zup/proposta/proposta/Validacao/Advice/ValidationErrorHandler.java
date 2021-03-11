@@ -1,5 +1,6 @@
 package br.zup.proposta.proposta.Validacao.Advice;
 
+import br.zup.proposta.proposta.Validacao.Exceptions.FingerPrintException;
 import br.zup.proposta.proposta.Validacao.Exceptions.DuplicateDocumentoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -43,6 +44,13 @@ public class ValidationErrorHandler {
         return dto;
     }
 
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(FingerPrintException.class)
+    public FormErrorDto fingerPrintInvalidEncode(FingerPrintException exception) {
+        LocalDateTime time = LocalDateTime.now();
+        FormErrorDto dto = new FormErrorDto("fingerprint","Base64 Encode inválido",400,time);
+        return dto;
+    }
 
 
 

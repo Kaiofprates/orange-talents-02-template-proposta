@@ -1,21 +1,15 @@
 package br.zup.proposta.proposta.Cartao;
 
-import br.zup.proposta.proposta.Cartao.Model.Cartao;
 import br.zup.proposta.proposta.Cartao.Model.CartaoRepository;
-import br.zup.proposta.proposta.Cartao.Model.Digital;
-import br.zup.proposta.proposta.Jobs.JobDeAvaliacaoCartao;
 import br.zup.proposta.proposta.Validacao.Exceptions.FingerPrintException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
-import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -24,30 +18,30 @@ public class CartaoController {
     @Autowired
     private CartaoRepository cartaoRepository;
 
-    private  final Logger logger  =  LoggerFactory.getLogger(JobDeAvaliacaoCartao.class);
-
+    /*
+     * No futuro melhorar  a lógica na recuração do id da digital
+     * Talvez, a estratégia de lançar excessões custumizadas com o status http
+     * não seja uma boa ideia ( verificar com instrutores )
+     */
 
     @PostMapping("/cartoes/{id}")
     public ResponseEntity<?> cadastraFingerprint(@PathVariable("id") String id,
                                                  @RequestBody @Valid BiometriaRequest request,
                                                  UriComponentsBuilder response) throws FingerPrintException {
+
+        // estoura uma excessão caso não seja possível fazer o decode para base64
         request.isValid();
 
         if(!cartaoRepository.existsById(id)){
             return ResponseEntity.notFound().build();
         }
 
-        Optional<Cartao> cartao = cartaoRepository.findById(id);
+        // retona o id da digital, ou retorna null em caso de falha.
+        Long digitalID = request.salvaDigital(cartaoRepository,id);
 
-        if(cartao.isPresent()){
-            Digital digital = new Digital(id,request.getFingerprint());
-            Cartao update = cartao.get();
-            update.setDigitais(digital);
-            List<Digital> digitais = update.getDigitais();
-            logger.info(update.getDigitais().get(digitais.size() - 1).toString());
-        }
+        Assert.notNull(digitalID,"Falha ao recuperar informações de biometria");
 
-        URI location = response.path("api/cartoes/"+id+"/biometria/{id}").buildAndExpand(12).toUri();
+        URI location = response.path("api/cartoes/"+id+"/biometria/{id}").buildAndExpand(digitalID).toUri();
         return ResponseEntity.created(location).build();
     }
 

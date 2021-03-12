@@ -16,7 +16,7 @@ public class Cartao {
     private LocalDateTime emitidoEm;
     @NotBlank
     private String titular;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.MERGE, mappedBy = "id")
     private List<Bloqueios> bloqueios;
     @OneToMany
     private List<Avisos> avisos;

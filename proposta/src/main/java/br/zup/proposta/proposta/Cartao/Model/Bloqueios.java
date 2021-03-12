@@ -3,6 +3,7 @@ package br.zup.proposta.proposta.Cartao.Model;
 import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 
@@ -10,17 +11,22 @@ import java.time.LocalDateTime;
 public class Bloqueios {
     @Id
     private String id;
-    private LocalDateTime bloqueadoEm;
+    @NotNull
+    private LocalDateTime bloqueadoEm = LocalDateTime.now();
+
     private String sistemaResponsavel;
+
+    private String  ipCliente;
+
     private Boolean ativo;
 
     @Deprecated
     public Bloqueios(){}
 
-    public Bloqueios(String id, LocalDateTime bloqueadoEm, String sistemaResponsavel, Boolean ativo) {
+    public Bloqueios(String id, String sistemaResponsavel, String ipCliente, Boolean ativo) {
         this.id = id;
-        this.bloqueadoEm = bloqueadoEm;
         this.sistemaResponsavel = sistemaResponsavel;
+        this.ipCliente = ipCliente;
         this.ativo = ativo;
     }
 
@@ -34,6 +40,10 @@ public class Bloqueios {
 
     public String getSistemaResponsavel() {
         return sistemaResponsavel;
+    }
+
+    public String getIpCliente() {
+        return ipCliente;
     }
 
     public Boolean getAtivo() {

@@ -67,7 +67,6 @@ public class CartaoTestes {
         ResultActions cartaoRequest =  mockMvc.perform(MockMvcRequestBuilders.get("http://localhost:9999/api/solicitacao/cartoes?idProposta=1"));
 
 
-
         List<Cartao> cartao = repository.findAll();
         String numeroCartao = cartao.get(0).getId();
 

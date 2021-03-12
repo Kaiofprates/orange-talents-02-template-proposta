@@ -1,4 +1,4 @@
-package br.zup.proposta.proposta.Cartao;
+package br.zup.proposta.proposta.Cartao.Biometria;
 
 import br.zup.proposta.proposta.Cartao.Model.CartaoRepository;
 import br.zup.proposta.proposta.Validacao.Exceptions.FingerPrintException;

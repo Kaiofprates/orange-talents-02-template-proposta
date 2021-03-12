@@ -10,7 +10,6 @@ import javax.persistence.Embeddable;
 
 @EnableFeignClients
 @EnableScheduling
-@EnableWebSecurity
 @SpringBootApplication
 public class PropostaApplication {
 

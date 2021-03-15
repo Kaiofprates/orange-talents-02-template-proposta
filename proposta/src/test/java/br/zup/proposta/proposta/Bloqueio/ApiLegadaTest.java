@@ -51,13 +51,12 @@ public class ApiLegadaTest {
     @DisplayName("Deveria testar o comportamento da api de bloqueio")
     public void bloqueioTest(){
         try {
-            SolicacaoRequest request = new SolicacaoRequest("277.375.130-27","John Doe", 8L);
+            SolicacaoRequest request = new SolicacaoRequest("277.375.130-27","John Doe", 1L);
             client.cadastra(request);
-            BuscaPropostaResponse buscaPropostaResponse = buscaPropostaClient.busca(8L);
+            BuscaPropostaResponse buscaPropostaResponse = buscaPropostaClient.busca(1L);
             String idCartao = buscaPropostaResponse.getId();
             BloqueioRequest bloqueioRequest = new BloqueioRequest("api_propostas");
             BloqueioResponse response = apiBloqueio.notificaBloqueio(idCartao,bloqueioRequest);
-            Assert.notNull(response);
             logger.info(response.getResultado().toString());
         }catch (FeignException e){
             logger.error(e.getMessage());

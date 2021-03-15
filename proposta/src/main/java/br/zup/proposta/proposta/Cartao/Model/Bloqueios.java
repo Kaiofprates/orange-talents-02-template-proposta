@@ -18,12 +18,12 @@ public class Bloqueios {
 
     private String  ipCliente;
 
-    private Boolean ativo;
+    private Boolean ativo = false;
 
     @Deprecated
     public Bloqueios(){}
 
-    public Bloqueios(String id, String sistemaResponsavel, String ipCliente, Boolean ativo) {
+    public Bloqueios(String sistemaResponsavel, String ipCliente, Boolean ativo, String id ) {
         this.id = id;
         this.sistemaResponsavel = sistemaResponsavel;
         this.ipCliente = ipCliente;

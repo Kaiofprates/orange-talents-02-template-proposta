@@ -32,7 +32,6 @@ public class BloqueioController {
     @Autowired
     private ApiBloqueio apiBloqueio;
 
-
     @PostMapping("/cartoes/bloqueio/{id}")
     @Transactional
     public ResponseEntity<?> bloqueioDeCartao(@PathVariable("id") String id,
@@ -44,8 +43,10 @@ public class BloqueioController {
             return ResponseEntity.notFound().build();
 
         String ip = userIp.getRemoteAddr();
+        Assert.notNull(ip, "Falha ao obter informações da requisição");
 
         AvaliaBloqueio avaliaBloqueio = new AvaliaBloqueio(id,ip,userAgent,cartao);
+        Assert.notNull(avaliaBloqueio, "Falha ao comunicar com o sistema");
 
         return avaliaBloqueio.autorizaBloqueio(manager,apiBloqueio);
     }

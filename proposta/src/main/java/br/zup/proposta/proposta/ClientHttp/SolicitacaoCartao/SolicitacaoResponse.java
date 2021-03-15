@@ -1,12 +1,12 @@
 package br.zup.proposta.proposta.ClientHttp.SolicitacaoCartao;
 
-public class ResponseSolicitacao {
+public class SolicitacaoResponse {
     private String documento;
     private String nome;
     private String resultadoSolicitacao;
     private String idProposta;
 
-    public ResponseSolicitacao(String documento, String nome, String resultadoSolicitacao, String idProposta) {
+    public SolicitacaoResponse(String documento, String nome, String resultadoSolicitacao, String idProposta) {
         this.documento = documento;
         this.nome = nome;
         this.resultadoSolicitacao = resultadoSolicitacao;

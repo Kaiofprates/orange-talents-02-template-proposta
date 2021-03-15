@@ -5,12 +5,8 @@ import br.zup.proposta.proposta.Cartao.Model.Cartao;
 import br.zup.proposta.proposta.ClientHttp.Bloqueio.ApiBloqueio;
 import br.zup.proposta.proposta.ClientHttp.Bloqueio.BloqueioRequest;
 import br.zup.proposta.proposta.ClientHttp.Bloqueio.BloqueioStatus;
-import br.zup.proposta.proposta.Jobs.JobDeAvaliacaoCartao;
 import br.zup.proposta.proposta.Validacao.Exceptions.BloqueioException;
 import feign.FeignException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -18,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
 @Component
 public class AvaliaBloqueio {
@@ -32,6 +27,7 @@ public class AvaliaBloqueio {
     public AvaliaBloqueio(){};
 
     public AvaliaBloqueio(String id, String ip, String userAgent, Cartao cartao) {
+        Assert.notNull(cartao, "Falha ao receber informações do cliente");
         this.id = id;
         this.ip = ip;
         this.userAgent = userAgent;
@@ -71,7 +67,7 @@ public class AvaliaBloqueio {
         Assert.notNull(id, "Falha ao processar dados do cartão");
         Assert.notNull(userAgent, "Falha ao processar dados do cartão");
         // false para o campo ativo!
-        return new Bloqueios(id,userAgent,ip,false);
+        return new Bloqueios(userAgent,ip,true, id);
     }
 
 }

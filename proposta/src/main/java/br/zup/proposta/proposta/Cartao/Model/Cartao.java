@@ -1,5 +1,7 @@
 package br.zup.proposta.proposta.Cartao.Model;
 
+import br.zup.proposta.proposta.ClientHttp.Bloqueio.BloqueioStatus;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -34,6 +36,9 @@ public class Cartao {
     @NotNull
     private Long idProposta;
 
+    @Enumerated(value = EnumType.STRING)
+    private BloqueioStatus statusBloqueio;
+
     @Deprecated
     public Cartao(){}
 
@@ -63,5 +68,9 @@ public class Cartao {
 
     public String getId() {
         return id;
+    }
+
+    public void setStatusBloqueio(BloqueioStatus statusBloqueio) {
+        this.statusBloqueio = statusBloqueio;
     }
 }

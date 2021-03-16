@@ -2,6 +2,7 @@ package br.zup.proposta.proposta.Proposta;
 
 import br.zup.proposta.proposta.Cartao.AvaliaCartao;
 import br.zup.proposta.proposta.Validacao.Exceptions.DuplicateDocumentoException;
+import io.micrometer.core.annotation.Counted;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.Assert;

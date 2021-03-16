@@ -2,6 +2,9 @@ package br.zup.proposta.proposta.Cartao.Avisos;
 
 import br.zup.proposta.proposta.Cartao.Model.Avisos;
 import br.zup.proposta.proposta.Cartao.Model.Cartao;
+import br.zup.proposta.proposta.ClientHttp.Avisos.AvisoApiClient;
+import br.zup.proposta.proposta.ClientHttp.Avisos.AvisoApiRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -20,7 +23,8 @@ public class AvisoController {
     @PersistenceContext
     private EntityManager manager;
 
-
+    @Autowired
+    private AvisoApiClient avisoApiClient;
 
     @PostMapping("/avisos/{id}")
     @Transactional
@@ -45,8 +49,9 @@ public class AvisoController {
         * no futuro refatore!
         */
 
-
         try{
+            AvisoApiRequest apiRequest = new AvisoApiRequest(request.getDestino(), request.getValidoAte().toString());
+            avisoApiClient.notificaAviso(id,apiRequest);
             manager.persist(novoAviso);
         }catch (Exception e){
             return ResponseEntity.unprocessableEntity().build();

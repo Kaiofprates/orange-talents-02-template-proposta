@@ -12,7 +12,7 @@ public class AvisoRequest {
     @NotBlank(message = "O campo destino não pode ser vazio ou nulo")
     private String destino;
     @Future
-    @JsonFormat(pattern = "dd-MM-yyyy")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     @NotNull(message = "O campo de data não pode estar vazio")
     private LocalDate validoAte;
 

@@ -14,7 +14,7 @@ public class Avisos {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Future
-    @JsonFormat(pattern = "dd-MM-yyyy")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     @NotNull(message = "O campo de data não pode estar vazio")
     private LocalDate validoAte;
     private String destino;

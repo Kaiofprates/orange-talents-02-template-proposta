@@ -1,5 +1,9 @@
 package br.zup.proposta.proposta.Bloqueio;
 
+import br.zup.proposta.proposta.Cartao.Avisos.AvisoRequest;
+import br.zup.proposta.proposta.ClientHttp.Avisos.AvisoApiClient;
+import br.zup.proposta.proposta.ClientHttp.Avisos.AvisoApiRequest;
+import br.zup.proposta.proposta.ClientHttp.Avisos.AvisoResponse;
 import br.zup.proposta.proposta.ClientHttp.Bloqueio.ApiBloqueio;
 import br.zup.proposta.proposta.ClientHttp.Bloqueio.BloqueioRequest;
 import br.zup.proposta.proposta.ClientHttp.Bloqueio.BloqueioResponse;
@@ -21,6 +25,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.util.Assert;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 @SpringBootTest
 @AutoConfigureMockMvc
 public class ApiLegadaTest {
@@ -33,6 +40,10 @@ public class ApiLegadaTest {
 
     @Autowired
     private BuscaPropostaClient buscaPropostaClient;
+
+
+    @Autowired
+    private AvisoApiClient avisoApiClient;
 
     @Autowired
     private SolicitacaoClient client;
@@ -55,11 +66,31 @@ public class ApiLegadaTest {
             String idCartao = buscaPropostaResponse.getId();
             BloqueioRequest bloqueioRequest = new BloqueioRequest("api_propostas");
             BloqueioResponse response = apiBloqueio.notificaBloqueio(idCartao,bloqueioRequest);
-            logger.info(response.getResultado().toString());
+            Assertions.fail(response.getResultado().toString());
+
+        }catch (FeignException e){
+            // captura a mensagem de erro como resultado esperado de FALHA a api externa, por não existir o cartão
+            logger.info(e.getMessage());
+
+        }
+    }
+
+    @Test
+    @DisplayName("Deveria testar o comportamento da notificação de avisos")
+    public void avisoTest(){
+
+        try{
+            LocalDate data = LocalDate.now().plusDays(7);
+            AvisoApiRequest request = new AvisoApiRequest("Irlanda",data.toString());
+            AvisoResponse response = avisoApiClient.notificaAviso("9521-4187-6395-7650",request);
+
+            // como o feign não retorna nada para status no range de 4** não espero receber o resultado da api
+
+            Assertions.fail(response.getResultado().toString());
         }catch (FeignException e){
             logger.error(e.getMessage());
-            Assertions.fail(e.getMessage());
         }
+
     }
 
 

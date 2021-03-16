@@ -20,7 +20,7 @@ public class Cartao {
     private String titular;
     @OneToMany(cascade = CascadeType.MERGE, mappedBy = "id")
     private List<Bloqueios> bloqueios;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.MERGE, mappedBy = "idCartao")
     private List<Avisos> avisos;
     @OneToMany
     private List<Carteiras> carteiras;
@@ -72,5 +72,9 @@ public class Cartao {
 
     public void setStatusBloqueio(BloqueioStatus statusBloqueio) {
         this.statusBloqueio = statusBloqueio;
+    }
+
+    public void setAvisos(Avisos avisos) {
+        this.avisos.add(avisos);
     }
 }

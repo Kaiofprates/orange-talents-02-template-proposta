@@ -1,7 +1,14 @@
 package br.zup.proposta.proposta.Cartao.Avisos;
 
+import br.zup.proposta.proposta.Cartao.Model.Avisos;
+import br.zup.proposta.proposta.Cartao.Model.Cartao;
+import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -9,18 +16,43 @@ import javax.validation.Valid;
 @RequestMapping("/api/cartoes")
 public class AvisoController {
 
+
+    @PersistenceContext
+    private EntityManager manager;
+
+
+
     @PostMapping("/avisos/{id}")
-    public String novoAviso(@PathVariable("id") String id,
-                            @Valid
+    @Transactional
+    public ResponseEntity<?> novoAviso(@PathVariable("id") String id,
+                                    @Valid
                             @RequestBody AvisoRequest request,
-                            @RequestHeader(value = "User-Agent") String userAgent,
-                            HttpServletRequest userIp){
+                                    @RequestHeader(value = "User-Agent") String userAgent,
+                                    HttpServletRequest userIp){
 
 
-        request.setIpCliente(userIp.getRemoteAddr());
-        request.setUserAgent(userAgent);
+        Cartao cartao = manager.find(Cartao.class,id);
+        if(cartao == null)
+            return  ResponseEntity.notFound().build();
 
-        return request.toString();
+
+        Avisos novoAviso = new Avisos(request.getValidoAte(), request.getDestino(),userIp.getRemoteAddr(),userAgent,id);
+        Assert.notNull(novoAviso,"Não foi possível criar solicitação de novo aviso");
+        cartao.setAvisos(novoAviso);
+
+        /*
+        * primeira implementação funcional
+        * no futuro refatore!
+        */
+
+
+        try{
+            manager.persist(novoAviso);
+        }catch (Exception e){
+            return ResponseEntity.unprocessableEntity().build();
+        }
+
+        return ResponseEntity.ok().build();
 
     }
 

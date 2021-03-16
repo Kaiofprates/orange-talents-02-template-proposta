@@ -45,8 +45,6 @@ public class ApiLegadaTest {
     *
     */
 
-
-
     @Test
     @DisplayName("Deveria testar o comportamento da api de bloqueio")
     public void bloqueioTest(){

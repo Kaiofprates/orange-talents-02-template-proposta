@@ -1,7 +1,7 @@
 package br.zup.proposta.proposta.Cartao.Biometria;
 
 import br.zup.proposta.proposta.Cartao.Model.Cartao;
-import br.zup.proposta.proposta.Cartao.Model.CartaoRepository;
+import br.zup.proposta.proposta.Cartao.Model.Repository.CartaoRepository;
 import br.zup.proposta.proposta.Cartao.Model.Digital;
 import br.zup.proposta.proposta.Validacao.Exceptions.FingerPrintException;
 import org.springframework.util.Assert;
@@ -28,7 +28,7 @@ public class BiometriaRequest {
 
     /*
     * Verifica se o fingerprint está no encode correto
-    * como em caso de falha se lanca uma exceção
+    * como em caso de falha se lanca uma exception
     * precisei tratá-la com uma exception específica
     */
 
@@ -48,9 +48,6 @@ public class BiometriaRequest {
 
         if(cartao.isPresent()){
 
-            /* refatorar essa lógia de atualização e recebimento do id
-            *  Talvez aqui um entitymanager fosse uma melhor opção.
-            */
 
             Digital digital = new Digital(id,fingerprint);
             Cartao update = cartao.get();

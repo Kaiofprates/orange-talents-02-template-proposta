@@ -6,7 +6,6 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
-
 @Entity
 public class Bloqueios {
     @Id

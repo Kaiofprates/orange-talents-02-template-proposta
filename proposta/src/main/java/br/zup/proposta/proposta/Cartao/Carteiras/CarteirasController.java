@@ -1,12 +1,9 @@
 package br.zup.proposta.proposta.Cartao.Carteiras;
 
-import br.zup.proposta.proposta.Cartao.AvaliaCartao;
 import br.zup.proposta.proposta.Cartao.Model.Cartao;
 import br.zup.proposta.proposta.Cartao.Model.Carteiras;
-import br.zup.proposta.proposta.Cartao.Model.CarteirasRepository;
+import br.zup.proposta.proposta.Cartao.Model.Repository.CarteirasRepository;
 import br.zup.proposta.proposta.ClientHttp.Carteiras.CarteiraClient;
-import br.zup.proposta.proposta.ClientHttp.Carteiras.CarteiraResponse;
-import feign.FeignException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +15,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.validation.Valid;
-import java.net.URI;
 import java.util.Optional;
 
 @RestController

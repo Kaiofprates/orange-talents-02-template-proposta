@@ -42,7 +42,7 @@ public class AvaliaBloqueio {
         if(bloqueios == null){
 
             try{
-                // -- tentar bloqueio do cartão na api legada
+                // -- tentar bloqueio do cartão na api externa
                 BloqueioRequest request = new BloqueioRequest(userAgent);
                 apiBloqueio.notificaBloqueio(id,request);
                 cartao.setStatusBloqueio(BloqueioStatus.BLOQUEADO);
@@ -52,6 +52,8 @@ public class AvaliaBloqueio {
 
             }catch (FeignException e){
                 throw new BloqueioException();
+            }catch (Exception e){
+                return ResponseEntity.unprocessableEntity().build();
             }
         }else{
             // checar se, caso exista o bloqueio, ele está ativo ou não.

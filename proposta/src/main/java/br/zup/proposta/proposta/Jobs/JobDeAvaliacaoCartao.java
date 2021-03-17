@@ -1,7 +1,7 @@
 package br.zup.proposta.proposta.Jobs;
 
 import br.zup.proposta.proposta.Cartao.Model.Cartao;
-import br.zup.proposta.proposta.Cartao.Model.CartaoRepository;
+import br.zup.proposta.proposta.Cartao.Model.Repository.CartaoRepository;
 import br.zup.proposta.proposta.ClientHttp.BuscaProposta.BuscaPropostaClient;
 import br.zup.proposta.proposta.ClientHttp.BuscaProposta.BuscaPropostaResponse;
 import br.zup.proposta.proposta.Proposta.Estado;

@@ -3,7 +3,7 @@ package br.zup.proposta.proposta.Carteiras;
 import br.zup.proposta.proposta.Bloqueio.ApiLegadaTest;
 import br.zup.proposta.proposta.Cartao.Carteiras.CarteirasDisponiveis;
 import br.zup.proposta.proposta.Cartao.Model.Carteiras;
-import br.zup.proposta.proposta.Cartao.Model.CarteirasRepository;
+import br.zup.proposta.proposta.Cartao.Model.Repository.CarteirasRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -14,9 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Profile;
 import org.springframework.util.Assert;
 
-import java.time.LocalDateTime;
 import java.util.Optional;
-import java.util.UUID;
 
 @SpringBootTest
 @AutoConfigureMockMvc

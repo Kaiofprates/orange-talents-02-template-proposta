@@ -1,5 +1,6 @@
-package br.zup.proposta.proposta.Cartao.Model;
+package br.zup.proposta.proposta.Cartao.Model.Repository;
 
+import br.zup.proposta.proposta.Cartao.Model.Cartao;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

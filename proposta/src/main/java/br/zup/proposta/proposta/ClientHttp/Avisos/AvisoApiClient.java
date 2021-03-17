@@ -1,6 +1,5 @@
 package br.zup.proposta.proposta.ClientHttp.Avisos;
 
-import br.zup.proposta.proposta.Cartao.Avisos.AvisoRequest;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;

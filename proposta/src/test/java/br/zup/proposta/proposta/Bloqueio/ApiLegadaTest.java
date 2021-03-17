@@ -1,6 +1,5 @@
 package br.zup.proposta.proposta.Bloqueio;
 
-import br.zup.proposta.proposta.Cartao.Avisos.AvisoRequest;
 import br.zup.proposta.proposta.ClientHttp.Avisos.AvisoApiClient;
 import br.zup.proposta.proposta.ClientHttp.Avisos.AvisoApiRequest;
 import br.zup.proposta.proposta.ClientHttp.Avisos.AvisoResponse;
@@ -11,8 +10,6 @@ import br.zup.proposta.proposta.ClientHttp.BuscaProposta.BuscaPropostaClient;
 import br.zup.proposta.proposta.ClientHttp.BuscaProposta.BuscaPropostaResponse;
 import br.zup.proposta.proposta.ClientHttp.SolicitacaoCartao.SolicacaoRequest;
 import br.zup.proposta.proposta.ClientHttp.SolicitacaoCartao.SolicitacaoClient;
-import br.zup.proposta.proposta.ClientHttp.SolicitacaoCartao.SolicitacaoResponse;
-import br.zup.proposta.proposta.Jobs.JobDeAvaliacaoCartao;
 import feign.FeignException;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -22,14 +19,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Profile;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.util.Assert;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@Profile("dev")
 public class ApiLegadaTest {
 
     @Autowired
@@ -48,7 +45,7 @@ public class ApiLegadaTest {
     @Autowired
     private SolicitacaoClient client;
 
-    private  final Logger logger  =  LoggerFactory.getLogger(JobDeAvaliacaoCartao.class);
+    private  final Logger logger  =  LoggerFactory.getLogger(ApiLegadaTest.class);
 
 
     /*

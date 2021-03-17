@@ -1,37 +1,23 @@
-package br.zup.proposta.proposta;
+package br.zup.proposta.proposta.Cartao;
 
-import br.zup.proposta.proposta.Cartao.Model.Cartao;
-import br.zup.proposta.proposta.Cartao.Model.CartaoRepository;
+import br.zup.proposta.proposta.Cartao.Model.Repository.CartaoRepository;
 import br.zup.proposta.proposta.ClientHttp.BuscaProposta.BuscaPropostaClient;
-import br.zup.proposta.proposta.Jobs.JobDeAvaliacaoCartao;
 import br.zup.proposta.proposta.Proposta.Endereco;
 import br.zup.proposta.proposta.Proposta.Proposta;
-import ch.qos.logback.core.net.ObjectWriter;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultActions;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Assert;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import java.math.BigDecimal;
-import java.util.List;
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@Profile("dev")
 public class CartaoTestes {
 
     @Autowired

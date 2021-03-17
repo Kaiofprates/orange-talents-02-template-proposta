@@ -44,11 +44,6 @@ public class AvisoController {
         Assert.notNull(novoAviso,"Não foi possível criar solicitação de novo aviso");
         cartao.setAvisos(novoAviso);
 
-        /*
-        * primeira implementação funcional
-        * no futuro refatore!
-        */
-
         try{
             AvisoApiRequest apiRequest = new AvisoApiRequest(request.getDestino(), request.getValidoAte().toString());
             avisoApiClient.notificaAviso(id,apiRequest);

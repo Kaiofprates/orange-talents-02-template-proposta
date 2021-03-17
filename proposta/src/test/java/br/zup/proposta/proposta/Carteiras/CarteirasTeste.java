@@ -8,6 +8,7 @@ import feign.FeignException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +16,14 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Profile;
 
+import javax.persistence.EntityManager;
+
 
 @SpringBootTest
 @AutoConfigureMockMvc
 @Profile("dev")
 public class CarteirasTeste {
+
 
     @Autowired
     private CarteiraClient carteiraClient;

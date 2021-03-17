@@ -1,11 +1,13 @@
 package br.zup.proposta.proposta.Cartao.Carteiras;
 
+import org.springframework.stereotype.Component;
+
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-
+@Component
 public class CarteirasRequest {
     @NotBlank
     @Email

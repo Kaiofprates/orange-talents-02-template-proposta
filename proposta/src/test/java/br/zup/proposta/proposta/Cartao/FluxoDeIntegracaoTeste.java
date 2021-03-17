@@ -1,4 +1,4 @@
-package br.zup.proposta.proposta;
+package br.zup.proposta.proposta.Cartao;
 
 import br.zup.proposta.proposta.Proposta.Proposta;
 import org.junit.jupiter.api.DisplayName;
@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.security.test.context.support.WithMockUser;
@@ -25,6 +26,7 @@ import java.util.concurrent.TimeUnit;
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@Profile("dev")
 public class FluxoDeIntegracaoTeste {
 
 

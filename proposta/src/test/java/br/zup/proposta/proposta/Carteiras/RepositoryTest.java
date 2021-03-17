@@ -31,10 +31,9 @@ public class RepositoryTest {
     @Test
     @DisplayName("Testa metodo de busca por id do cartão e do emissor")
     public void testaFindByIdCartaoAndEmissor(){
-        UUID id = UUID.randomUUID();
         String idCartao = "6381-9947-9319-7973";
         String emissor = CarteirasDisponiveis.PAYPAL.toString();
-        Carteiras carteiras = new Carteiras(id.toString(),"email@Teste.com", LocalDateTime.now(),emissor);
+        Carteiras carteiras = new Carteiras("email@Teste.com",emissor);
         carteiras.setIdCartao(idCartao);
         repository.save(carteiras);
         Optional<Carteiras> carteiraBuscada = repository.findByIdcartaoAndEmissor(idCartao,emissor);
@@ -45,10 +44,9 @@ public class RepositoryTest {
     @Test
     @DisplayName("Testa falha do metodo de busca por id do cartão e do emissor")
     public void testaFalhaDoFindByIdCartaoAndEmissor(){
-        UUID id = UUID.randomUUID();
         String idCartao = "6381-9947-9319-7971";
         String emissor = CarteirasDisponiveis.PAYPAL.toString();
-        Carteiras carteiras = new Carteiras(id.toString(),"mail@Teste.com", LocalDateTime.now(),emissor);
+        Carteiras carteiras = new Carteiras("mail@Teste.com",emissor);
         carteiras.setIdCartao(idCartao);
         repository.save(carteiras);
         Optional<Carteiras> carteiraBuscada = repository.findByIdcartaoAndEmissor(idCartao,CarteirasDisponiveis.SANSUNG_PAY.toString());

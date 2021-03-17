@@ -28,7 +28,7 @@ public class AvaliaCartao {
     private final Logger logger  = LoggerFactory.getLogger(AvaliaCartao.class);
 
 
-    public void avaliaCartao(Proposta proposta){
+    public Boolean avaliaCartao(Proposta proposta){
         SolicacaoRequest request = new SolicacaoRequest(proposta.getDocumento(),proposta.getNome(),proposta.getId());
 
         try{
@@ -40,9 +40,13 @@ public class AvaliaCartao {
             logger.info("Proposta avaliada com sucesso!");
             logger.info(avaliacao);
 
+            return true;
+
         }catch (FeignException e){
             logger.error(e.getMessage());
+            return  false;
         }
+
     }
 
 }

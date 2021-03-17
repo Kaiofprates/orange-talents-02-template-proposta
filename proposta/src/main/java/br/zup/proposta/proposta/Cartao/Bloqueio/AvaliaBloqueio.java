@@ -47,7 +47,10 @@ public class AvaliaBloqueio {
                 apiBloqueio.notificaBloqueio(id,request);
                 cartao.setStatusBloqueio(BloqueioStatus.BLOQUEADO);
 
-                manager.persist(processaBloqueio(ip,userAgent,id));
+                Bloqueios savaBloqueio = processaBloqueio(ip,userAgent,id);
+                Assert.notNull(savaBloqueio,"Falha ao persistir bloqueio");
+
+                manager.persist(savaBloqueio);
                 return ResponseEntity.ok().build();
 
             }catch (FeignException e){

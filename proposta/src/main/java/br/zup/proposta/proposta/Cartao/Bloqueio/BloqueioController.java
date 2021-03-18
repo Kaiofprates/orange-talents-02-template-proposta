@@ -1,18 +1,9 @@
 package br.zup.proposta.proposta.Cartao.Bloqueio;
 
-import br.zup.proposta.proposta.Cartao.Model.Bloqueios;
 import br.zup.proposta.proposta.Cartao.Model.Cartao;
 import br.zup.proposta.proposta.ClientHttp.Bloqueio.ApiBloqueio;
-import br.zup.proposta.proposta.ClientHttp.Bloqueio.BloqueioRequest;
-import br.zup.proposta.proposta.ClientHttp.Bloqueio.BloqueioStatus;
-import br.zup.proposta.proposta.Jobs.JobDeAvaliacaoCartao;
 import br.zup.proposta.proposta.Validacao.Exceptions.BloqueioException;
-import feign.FeignException;
-import javassist.tools.web.BadHttpRequest;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;

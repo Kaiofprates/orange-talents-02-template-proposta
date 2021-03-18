@@ -35,19 +35,26 @@ services:
       POSTGRES_DB: keycloak
       POSTGRES_HOST: postgres
   proposta:
-                build:
-                        dockerfile: ./proposta/Dockerfile
-                        context: .
-                image: orange/proposta
-                container_name: proposta
-                ports:
-                        - "8080:8080"
-                environment: 
-                        - API_PROPOSTA=http://contas:8888/api 
-                        - API_CARTAO=http://analise:9999/api/solicitacao
-                depends_on: 
-                        - contas
-                        - analise        
+    container_name: proposta
+    build:
+        dockerfile: ./proposta/Dockerfile
+        context: .
+    image: orange/proposta
+    ports:
+      - 8080:8080
+    environment: 
+      API_PROPOSTA: http://contas:8888/api 
+      API_CARTAO: http://analise:9999/api/solicitacao
+      JAEGER_ENDPOINT: http://jaeger:14268/api/traces
+      API_BLOQUEIO: http://contas:8888/api/cartoes
+      JAEGER_SERVICE_NAME: propostas
+      KEYCLOAK_ISSUER_URI: http://localhost:18080/auth/realms/nosso-cartao
+      KEYCLOAK_JWKS_URI: http://localhost:18080/auth/realms/nosso-cartao/protocol/openid-connect/certs
+      AUTH_API: http://keycloak:8080/auth/realms/nosso-cartao/protocol/openid-connect/token
+    depends_on: 
+      - contas
+      - analise
+      - keycloak        
   keycloak:
     image: jboss/keycloak
     ports:

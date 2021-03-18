@@ -18,8 +18,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     authorizeRequests
                             .antMatchers(HttpMethod.POST, "/api/auth").permitAll()
                             .antMatchers("/h2-console/**").permitAll()
-                            // habilitando endpoint de avisos para desenvolvimento
-                            .antMatchers(HttpMethod.POST,"/api/cartoes/carteiras/**").permitAll()
                             .antMatchers(HttpMethod.GET,"/actuator/**").permitAll()
                             .anyRequest().authenticated()
                     ;

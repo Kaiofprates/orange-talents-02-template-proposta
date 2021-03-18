@@ -1,13 +1,14 @@
 package br.zup.proposta.proposta.Proposta;
 
 import br.zup.proposta.proposta.Validacao.Annotations.CPFOrCNPJ;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.crypto.encrypt.Encryptors;
+import org.springframework.security.crypto.encrypt.TextEncryptor;
+import org.springframework.util.Assert;
 
 import javax.persistence.*;
 import javax.validation.Valid;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 
 @Entity
@@ -16,7 +17,6 @@ public class Proposta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotBlank
-    @CPFOrCNPJ
     @Column(unique = true)
     private String documento;
     @NotBlank
@@ -44,7 +44,8 @@ public class Proposta {
                     @NotBlank @Email String email,
                     @NotBlank String nome, @Valid @NotNull Endereco endereco,
                     @NotNull @Positive BigDecimal salario) {
-        this.documento = documento;
+
+        this.documento =  documento;
         this.email = email;
         this.nome = nome;
         this.endereco = endereco;

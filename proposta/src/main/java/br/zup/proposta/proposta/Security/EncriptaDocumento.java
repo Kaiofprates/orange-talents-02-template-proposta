@@ -1,2 +1,20 @@
-package br.zup.proposta.proposta.Security;public class EncriptaDocumento {
+package br.zup.proposta.proposta.Security;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.crypto.encrypt.Encryptors;
+import org.springframework.security.crypto.encrypt.TextEncryptor;
+import org.springframework.stereotype.Component;
+
+@Component
+public class EncriptaDocumento {
+
+    private String key = "pa55word";
+    private String salt = "1A123AB293";
+
+    public  String processa(String documento){
+        TextEncryptor encryptor = Encryptors.queryableText(key,salt);
+        String documentoEncript = encryptor.encrypt(documento);
+        return documentoEncript;
+    }
+
 }

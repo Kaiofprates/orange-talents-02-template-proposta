@@ -17,8 +17,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 {
                     authorizeRequests
                             .antMatchers(HttpMethod.POST, "/api/auth").permitAll()
-                            .antMatchers("/h2-console/**").permitAll()
-                            .antMatchers(HttpMethod.GET,"/actuator/**").permitAll()
+                            .antMatchers("/actuator/**").permitAll()
                             .anyRequest().authenticated()
                     ;
                 }
@@ -28,11 +27,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
                 .csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-
-        // apenas para o acesso ao h2 console
-
-        http.headers().frameOptions().disable();
-
     }
 
 }

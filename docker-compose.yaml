@@ -34,6 +34,19 @@ services:
       POSTGRES_PASSWORD: password
       POSTGRES_DB: keycloak
       POSTGRES_HOST: postgres
+
+  postgresms:
+    image: 'postgres:alpine'
+    volumes:
+      - postgresms-volume:/var/lib/postgresql/data
+    ports:
+      - 5433:5432
+    environment:
+      POSTGRES_USER: msproposta
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: orange
+      POSTGRES_HOST: postgres    
+
   proposta:
     container_name: proposta
     build:
@@ -113,7 +126,7 @@ services:
       LOG_LEVEL: INFO
       KAFKA_HOST: "kafka:29092"
       JAEGER_ENDPOINT: http://jaeger:14268/api/traces
-
+      TRANSACTION_DELAY: 30000
   jaeger:
     image: jaegertracing/all-in-one
     ports:
@@ -159,3 +172,4 @@ volumes:
   grafana-volume:
   prometheus-volume:
   postgres-volume:
+  postgresms-volume:
